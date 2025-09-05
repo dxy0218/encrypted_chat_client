@@ -7,7 +7,6 @@ from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 from cryptography.hazmat.primitives.hashes import SHA256
 from cryptography.hazmat.primitives.serialization import load_der_public_key, Encoding, PublicFormat
 import socks
-import requests
 
 def setup_tor_proxy():
     # 配置 Tor 代理
