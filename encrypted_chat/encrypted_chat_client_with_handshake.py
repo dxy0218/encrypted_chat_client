@@ -63,6 +63,147 @@ THEMES = {
 COLOR_INFO = COLOR_WARN = COLOR_ERROR = COLOR_INPUT = COLOR_RESET = ""
 CURRENT_THEME = "dark"
 
+# Language dictionaries for UI strings
+LANGUAGES = {
+    "en": {
+        "startup_art": (
+            "===================================\n"
+            "||                               ||\n"
+            "||         Tunnel Chat           ||\n"
+            "||                               ||\n"
+            "==================================="
+        ),
+        "press_enter": "Press Enter to continue...",
+        "banner_title": "=== Tunnel Chat ===",
+        "command_hint": (
+            "Commands: /image <path>, /video <path>, /file <path>, /emoji <alias>,"
+            " /emoji add <alias> <path>, /temp <sec> <msg>, /fav <id>, /archive <id>,"
+            " /export <file>, /import <file>, /nick <name>, /group <name>, /lang <code>, /exit"
+        ),
+        "enter_password": "Enter application password: ",
+        "incorrect_password": "Incorrect password.",
+        "listening_on": "Listening on {host}:{port}...",
+        "peer_connected": "Peer connected from {host}:{port}",
+        "connected_to": "Connected to peer {host}:{port}",
+        "session_key": "Session key established.",
+        "language_switched": "Language switched to {lang}",
+        "available_languages": "Available languages: {langs}",
+        "unknown_option": "Unknown option.",
+        "contacts_header": "Contacts:",
+        "no_contacts": "(no contacts)",
+        "contact_prompt": "Select contact or command [add/remove/hide/unhide/theme/lang/exit]: ",
+        "name_prompt": "Name: ",
+        "identifier_prompt": "Identifier or IP address: ",
+        "port_prompt": "Port (default {port}): ",
+        "contact_added": "Contact {alias} added.",
+        "name_remove": "Name to remove: ",
+        "contact_removed": "Contact {alias} removed.",
+        "contact_not_found": "Contact not found.",
+        "name_hide": "Name to hide: ",
+        "contact_hidden": "Contact {alias} hidden.",
+        "name_unhide": "Name to unhide: ",
+        "contact_unhidden": "Contact {alias} unhidden.",
+        "choose_theme": "Choose theme (dark/light/auto): ",
+        "unknown_theme": "Unknown theme.",
+        "select_mode": "Select mode: 'direct' for IP chat or 'contacts': ",
+        "enter_target": "Enter target IP or identifier: ",
+        "authentication_failed": "Authentication failed.",
+        "unknown_mode": "Unknown mode.",
+        "usage_temp": "Usage: /temp <seconds> <message>",
+        "invalid_seconds": "Invalid seconds.",
+        "usage_emoji": "Usage: /emoji <alias>|add <alias> <path>|list",
+        "unknown_emoji": "Unknown emoji: {alias}",
+        "no_emojis": "(no emojis)",
+        "emoji_added": "Emoji {alias} added.",
+        "file_not_found": "File not found: {path}",
+        "cannot_read_image": "Cannot read image: {path}",
+        "sent_image": "[You #{id}] sent image {name}",
+        "cannot_read_video": "Cannot read video: {path}",
+        "sent_video": "[You #{id}] sent video {name}",
+        "cannot_read_file": "Cannot read file: {path}",
+        "sent_file": "[You #{id}] sent file {name}",
+        "lang_prompt": "Language ({langs}): ",
+        "your_identifier": "Your identifier: {id}",
+    },
+    "zh": {
+        "startup_art": (
+            "===================================\n"
+            "||                               ||\n"
+            "||           隧道聊天           ||\n"
+            "||                               ||\n"
+            "==================================="
+        ),
+        "press_enter": "按回车继续...",
+        "banner_title": "=== 隧道聊天 ===",
+        "command_hint": (
+            "命令: /image <路径>, /video <路径>, /file <路径>, /emoji <别名>,"
+            " /emoji add <别名> <路径>, /temp <秒> <消息>, /fav <ID>, /archive <ID>,"
+            " /export <文件>, /import <文件>, /nick <昵称>, /group <名字>, /lang <代码>, /exit"
+        ),
+        "enter_password": "请输入应用密码：",
+        "incorrect_password": "密码错误。",
+        "listening_on": "正在监听 {host}:{port}...",
+        "peer_connected": "对等方已连接，自 {host}:{port}",
+        "connected_to": "已连接到对等方 {host}:{port}",
+        "session_key": "会话密钥已建立。",
+        "language_switched": "已切换语言为 {lang}",
+        "available_languages": "可用语言: {langs}",
+        "unknown_option": "未知选项。",
+        "contacts_header": "联系人:",
+        "no_contacts": "(暂无联系人)",
+        "contact_prompt": "选择联系人或指令 [add/remove/hide/unhide/theme/lang/exit]: ",
+        "name_prompt": "名称: ",
+        "identifier_prompt": "识别码或IP地址: ",
+        "port_prompt": "端口 (默认 {port}): ",
+        "contact_added": "联系人 {alias} 已添加。",
+        "name_remove": "要移除的名称: ",
+        "contact_removed": "联系人 {alias} 已移除。",
+        "contact_not_found": "未找到联系人。",
+        "name_hide": "要隐藏的名称: ",
+        "contact_hidden": "联系人 {alias} 已隐藏。",
+        "name_unhide": "要取消隐藏的名称: ",
+        "contact_unhidden": "联系人 {alias} 已显示。",
+        "choose_theme": "选择主题 (dark/light/auto): ",
+        "unknown_theme": "未知主题。",
+        "select_mode": "选择模式: 直接IP聊天 'direct' 或联系人模式 'contacts': ",
+        "enter_target": "输入目标IP或识别码: ",
+        "authentication_failed": "认证失败。",
+        "unknown_mode": "未知模式。",
+        "usage_temp": "用法: /temp <秒数> <消息>",
+        "invalid_seconds": "无效的秒数。",
+        "usage_emoji": "用法: /emoji <别名>|add <别名> <路径>|list",
+        "unknown_emoji": "未知表情: {alias}",
+        "no_emojis": "(暂无表情)",
+        "emoji_added": "表情 {alias} 已添加。",
+        "file_not_found": "未找到文件: {path}",
+        "cannot_read_image": "无法读取图片: {path}",
+        "sent_image": "[你 #{id}] 已发送图片 {name}",
+        "cannot_read_video": "无法读取视频: {path}",
+        "sent_video": "[你 #{id}] 已发送视频 {name}",
+        "cannot_read_file": "无法读取文件: {path}",
+        "sent_file": "[你 #{id}] 已发送文件 {name}",
+        "lang_prompt": "语言 ({langs}): ",
+        "your_identifier": "你的识别码: {id}",
+    },
+}
+
+CURRENT_LANG = "zh"
+LANG = LANGUAGES[CURRENT_LANG]
+
+
+def set_language(lang):
+    global CURRENT_LANG, LANG
+    if lang in LANGUAGES:
+        CURRENT_LANG = lang
+        LANG = LANGUAGES[lang]
+    else:
+        CURRENT_LANG = "en"
+        LANG = LANGUAGES["en"]
+
+
+def tr(key, **kwargs):
+    return LANG.get(key, LANGUAGES["en"].get(key, key)).format(**kwargs)
+
 
 def apply_theme(theme):
     """Apply a color theme by updating global ANSI codes."""
@@ -87,18 +228,12 @@ def pick_theme(choice):
 def show_startup_screen():
     """Clear the terminal and display a startup splash."""
     os.system("cls" if os.name == "nt" else "clear")
-    art = r"""
-===================================
-||                               ||
-||           隧道聊天           ||
-||                               ||
-===================================
-"""
+    art = tr("startup_art")
     print(f"{COLOR_INFO}{art}{COLOR_RESET}")
-    input(f"{COLOR_INPUT}Press Enter to continue...{COLOR_RESET}")
+    input(f"{COLOR_INPUT}{tr('press_enter')}{COLOR_RESET}")
 
 
-def print_banner():
+def _print_banner_old():
     """Display a simple startup banner and command hint."""
     print(f"{COLOR_INFO}=== 隧道聊天 ==={COLOR_RESET}")
     print(
@@ -110,9 +245,9 @@ def print_banner():
 
 def require_app_password():
     for _ in range(3):
-        if getpass.getpass("Enter application password: ") == APP_PASSWORD:
+        if getpass.getpass(tr("enter_password")) == APP_PASSWORD:
             return True
-        print(f"{COLOR_ERROR}Incorrect password.{COLOR_RESET}")
+        print(f"{COLOR_ERROR}{tr('incorrect_password')}{COLOR_RESET}")
     return False
 
 def generate_dh_key_pair():
@@ -198,7 +333,7 @@ def load_or_create_profile(port):
     name = input("Enter display name: ").strip() or "Anonymous"
     with open(PROFILE_FILE, "w", encoding="utf-8") as f:
         json.dump({"user_id": user_id, "name": name}, f)
-    print(f"Your user identifier: {user_id}")
+    print(tr("your_identifier", id=user_id))
     return user_id, name
 
 
@@ -335,17 +470,17 @@ def start_chat(host, port, name, listen=False):
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         server_socket.bind((host, port))
         server_socket.listen(1)
-        print(f"{COLOR_INFO}Listening on {host}:{port}...{COLOR_RESET}")
+        print(f"{COLOR_INFO}{tr('listening_on', host=host, port=port)}{COLOR_RESET}")
         client_socket, addr = server_socket.accept()
         server_socket.close()
-        print(f"{COLOR_INFO}Peer connected from {addr[0]}:{addr[1]}{COLOR_RESET}")
+        print(f"{COLOR_INFO}{tr('peer_connected', host=addr[0], port=addr[1])}{COLOR_RESET}")
     else:
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.connect((host, port))
-        print(f"{COLOR_INFO}Connected to peer {host}:{port}{COLOR_RESET}")
+        print(f"{COLOR_INFO}{tr('connected_to', host=host, port=port)}{COLOR_RESET}")
 
     session_cipher = perform_key_exchange(client_socket, is_server=listen)
-    print(f"{COLOR_INFO}Session key established.{COLOR_RESET}")
+    print(f"{COLOR_INFO}{tr('session_key')}{COLOR_RESET}")
     print_banner()
 
     local_key = load_or_create_key()
@@ -388,15 +523,15 @@ def start_chat(host, port, name, listen=False):
                         for alias in emojis:
                             print(f"  {alias} -> {emojis[alias]}")
                     else:
-                        print("  (no emojis)")
+                        print(f"  {tr('no_emojis')}")
                 elif parts[1] == "add" and len(parts) == 4:
                     alias, path = parts[2], parts[3]
                     if os.path.exists(path):
                         emojis[alias] = path
                         save_emojis(emojis)
-                        print(f"{COLOR_INFO}Emoji {alias} added.{COLOR_RESET}")
+                        print(f"{COLOR_INFO}{tr('emoji_added', alias=alias)}{COLOR_RESET}")
                     else:
-                        print(f"{COLOR_ERROR}File not found: {path}{COLOR_RESET}")
+                        print(f"{COLOR_ERROR}{tr('file_not_found', path=path)}{COLOR_RESET}")
                 elif len(parts) == 2:
                     alias = parts[1]
                     path = emojis.get(alias)
@@ -405,7 +540,7 @@ def start_chat(host, port, name, listen=False):
                             with open(path, "rb") as img_file:
                                 img_data = img_file.read()
                         except OSError:
-                            print(f"{COLOR_ERROR}Cannot read image: {path}{COLOR_RESET}")
+                            print(f"{COLOR_ERROR}{tr('cannot_read_image', path=path)}{COLOR_RESET}")
                             continue
                         b64_data = base64.b64encode(img_data).decode()
                         payload = f"IMG|{os.path.basename(path)}|{b64_data}"
@@ -421,18 +556,18 @@ def start_chat(host, port, name, listen=False):
                             }
                         )
                     else:
-                        print(f"{COLOR_WARN}Unknown emoji: {alias}{COLOR_RESET}")
+                        print(f"{COLOR_WARN}{tr('unknown_emoji', alias=alias)}{COLOR_RESET}")
                 else:
-                    print(f"{COLOR_WARN}Usage: /emoji <alias>|add <alias> <path>|list{COLOR_RESET}")
+                    print(f"{COLOR_WARN}{tr('usage_emoji')}{COLOR_RESET}")
             elif message.startswith("/temp "):
                 parts = message.split(" ", 2)
                 if len(parts) < 3:
-                    print(f"{COLOR_WARN}Usage: /temp <seconds> <message>{COLOR_RESET}")
+                    print(f"{COLOR_WARN}{tr('usage_temp')}{COLOR_RESET}")
                     continue
                 try:
                     ttl = int(parts[1])
                 except ValueError:
-                    print(f"{COLOR_ERROR}Invalid seconds.{COLOR_RESET}")
+                    print(f"{COLOR_ERROR}{tr('invalid_seconds')}{COLOR_RESET}")
                     continue
                 text = parts[2]
                 send_encrypted(client_socket, f"TEMP|{ttl}|{text}", session_cipher, local_cipher)
@@ -513,13 +648,23 @@ def start_chat(host, port, name, listen=False):
                     print(f"{COLOR_INFO}Theme switched to {new_theme}.{COLOR_RESET}")
                 else:
                     print(f"{COLOR_WARN}Usage: /theme <dark|light|auto>{COLOR_RESET}")
+            elif message.startswith("/lang"):
+                parts = message.split()
+                if len(parts) == 2 and parts[1] in LANGUAGES:
+                    set_language(parts[1])
+                    print(f"{COLOR_INFO}{tr('language_switched', lang=parts[1])}{COLOR_RESET}")
+                    print_banner()
+                else:
+                    print(
+                        f"{COLOR_WARN}{tr('available_languages', langs=', '.join(LANGUAGES))}{COLOR_RESET}"
+                    )
             elif message.startswith("/image "):
                 path = message.split(" ", 1)[1]
                 try:
                     with open(path, "rb") as img_file:
                         img_data = img_file.read()
                 except OSError:
-                    print(f"{COLOR_ERROR}Cannot read image: {path}{COLOR_RESET}")
+                    print(f"{COLOR_ERROR}{tr('cannot_read_image', path=path)}{COLOR_RESET}")
                     continue
                 b64_data = base64.b64encode(img_data).decode()
                 payload = f"IMG|{os.path.basename(path)}|{b64_data}"
@@ -534,11 +679,13 @@ def start_chat(host, port, name, listen=False):
                         "time": time.time(),
                     }
                 )
-                print(f"{COLOR_INFO}[You #{msg_id}] sent image {os.path.basename(path)}{COLOR_RESET}")
+                print(
+                    f"{COLOR_INFO}{tr('sent_image', id=msg_id, name=os.path.basename(path))}{COLOR_RESET}"
+                )
             elif message.startswith("/video "):
                 path = message.split(" ", 1)[1]
                 if not os.path.exists(path):
-                    print(f"{COLOR_ERROR}Cannot read video: {path}{COLOR_RESET}")
+                    print(f"{COLOR_ERROR}{tr('cannot_read_video', path=path)}{COLOR_RESET}")
                     continue
                 send_large_file(client_socket, path, "VID", session_cipher, local_cipher)
                 msg_id = next_id(state)
@@ -551,11 +698,13 @@ def start_chat(host, port, name, listen=False):
                         "time": time.time(),
                     }
                 )
-                print(f"{COLOR_INFO}[You #{msg_id}] sent video {os.path.basename(path)}{COLOR_RESET}")
+                print(
+                    f"{COLOR_INFO}{tr('sent_video', id=msg_id, name=os.path.basename(path))}{COLOR_RESET}"
+                )
             elif message.startswith("/file "):
                 path = message.split(" ", 1)[1]
                 if not os.path.exists(path):
-                    print(f"{COLOR_ERROR}Cannot read file: {path}{COLOR_RESET}")
+                    print(f"{COLOR_ERROR}{tr('cannot_read_file', path=path)}{COLOR_RESET}")
                     continue
                 send_large_file(client_socket, path, "FILE", session_cipher, local_cipher)
                 msg_id = next_id(state)
@@ -568,7 +717,9 @@ def start_chat(host, port, name, listen=False):
                         "time": time.time(),
                     }
                 )
-                print(f"{COLOR_INFO}[You #{msg_id}] sent file {os.path.basename(path)}{COLOR_RESET}")
+                print(
+                    f"{COLOR_INFO}{tr('sent_file', id=msg_id, name=os.path.basename(path))}{COLOR_RESET}"
+                )
             else:
                 send_encrypted(client_socket, message, session_cipher, local_cipher)
                 msg_id = next_id(state)
@@ -634,23 +785,23 @@ def save_encrypted_list(filename, entries, cipher):
 def contacts_mode(default_port, self_name):
     contacts = load_contacts()
     while True:
-        print(f"\n{COLOR_INFO}Contacts:{COLOR_RESET}")
+        print(f"\n{COLOR_INFO}{tr('contacts_header')}{COLOR_RESET}")
         visible = {k: v for k, v in contacts.items() if not v.get("hidden")}
         if visible:
             for alias, addr in visible.items():
                 print(f"  - {alias}: {addr['host']}:{addr['port']}")
         else:
-            print("  (no contacts)")
+            print(f"  {tr('no_contacts')}")
         choice = input(
-            f"{COLOR_INPUT}Select contact or command [add/remove/hide/unhide/theme/exit]: {COLOR_RESET}"
+            f"{COLOR_INPUT}{tr('contact_prompt')}{COLOR_RESET}"
         ).strip()
         if choice == "add":
-            alias = input(f"{COLOR_INPUT}Name: {COLOR_RESET}")
+            alias = input(f"{COLOR_INPUT}{tr('name_prompt')}{COLOR_RESET}")
             token_or_ip = input(
-                f"{COLOR_INPUT}Identifier or IP address: {COLOR_RESET}"
+                f"{COLOR_INPUT}{tr('identifier_prompt')}{COLOR_RESET}"
             ).strip()
             port_in = input(
-                f"{COLOR_INPUT}Port (default {default_port}): {COLOR_RESET}"
+                f"{COLOR_INPUT}{tr('port_prompt', port=default_port)}{COLOR_RESET}"
             ).strip()
             port = int(port_in) if port_in else default_port
             data = decode_identifier(token_or_ip)
@@ -661,44 +812,61 @@ def contacts_mode(default_port, self_name):
             else:
                 contacts[alias] = {"host": token_or_ip, "port": port}
             save_contacts(contacts)
-            print(f"{COLOR_INFO}Contact {alias} added.{COLOR_RESET}")
+            print(f"{COLOR_INFO}{tr('contact_added', alias=alias)}{COLOR_RESET}")
         elif choice == "remove":
-            alias = input(f"{COLOR_INPUT}Name to remove: {COLOR_RESET}")
+            alias = input(f"{COLOR_INPUT}{tr('name_remove')}{COLOR_RESET}")
             if alias in contacts:
                 contacts.pop(alias)
                 save_contacts(contacts)
-                print(f"{COLOR_INFO}Contact {alias} removed.{COLOR_RESET}")
+                print(f"{COLOR_INFO}{tr('contact_removed', alias=alias)}{COLOR_RESET}")
             else:
-                print(f"{COLOR_WARN}Contact not found.{COLOR_RESET}")
+                print(f"{COLOR_WARN}{tr('contact_not_found')}{COLOR_RESET}")
         elif choice == "hide":
-            alias = input(f"{COLOR_INPUT}Name to hide: {COLOR_RESET}")
+            alias = input(f"{COLOR_INPUT}{tr('name_hide')}{COLOR_RESET}")
             if alias in contacts:
                 contacts[alias]["hidden"] = True
                 save_contacts(contacts)
-                print(f"{COLOR_INFO}Contact {alias} hidden.{COLOR_RESET}")
+                print(f"{COLOR_INFO}{tr('contact_hidden', alias=alias)}{COLOR_RESET}")
             else:
-                print(f"{COLOR_WARN}Contact not found.{COLOR_RESET}")
+                print(f"{COLOR_WARN}{tr('contact_not_found')}{COLOR_RESET}")
         elif choice == "unhide":
-            alias = input(f"{COLOR_INPUT}Name to unhide: {COLOR_RESET}")
+            alias = input(f"{COLOR_INPUT}{tr('name_unhide')}{COLOR_RESET}")
             if alias in contacts:
                 contacts[alias]["hidden"] = False
                 save_contacts(contacts)
-                print(f"{COLOR_INFO}Contact {alias} unhidden.{COLOR_RESET}")
+                print(f"{COLOR_INFO}{tr('contact_unhidden', alias=alias)}{COLOR_RESET}")
             else:
-                print(f"{COLOR_WARN}Contact not found.{COLOR_RESET}")
+                print(f"{COLOR_WARN}{tr('contact_not_found')}{COLOR_RESET}")
         elif choice == "theme":
-            t = input(f"{COLOR_INPUT}Choose theme (dark/light/auto): {COLOR_RESET}").strip()
+            t = input(f"{COLOR_INPUT}{tr('choose_theme')}{COLOR_RESET}").strip()
             if t in ["dark", "light", "auto"]:
                 apply_theme(pick_theme(t))
             else:
-                print(f"{COLOR_WARN}Unknown theme.{COLOR_RESET}")
+                print(f"{COLOR_WARN}{tr('unknown_theme')}{COLOR_RESET}")
+        elif choice == "lang":
+            code = input(
+                f"{COLOR_INPUT}{tr('lang_prompt', langs=', '.join(LANGUAGES))}{COLOR_RESET}"
+            ).strip()
+            if code in LANGUAGES:
+                set_language(code)
+                print(f"{COLOR_INFO}{tr('language_switched', lang=code)}{COLOR_RESET}")
+            else:
+                print(
+                    f"{COLOR_WARN}{tr('available_languages', langs=', '.join(LANGUAGES))}{COLOR_RESET}"
+                )
         elif choice == "exit":
             break
         elif choice in contacts:
             info = contacts[choice]
             start_chat(info['host'], info['port'], self_name)
         else:
-            print(f"{COLOR_WARN}Unknown option.{COLOR_RESET}")
+            print(f"{COLOR_WARN}{tr('unknown_option')}{COLOR_RESET}")
+
+
+def print_banner():
+    """Display a simple startup banner and command hint."""
+    print(f"{COLOR_INFO}{tr('banner_title')}{COLOR_RESET}")
+    print(tr("command_hint"))
 
 
 def main():
@@ -717,23 +885,30 @@ def main():
         default="auto",
         help="Color theme (auto uses time of day)",
     )
+    parser.add_argument(
+        "--lang",
+        choices=list(LANGUAGES.keys()),
+        default="zh",
+        help="UI language",
+    )
     args = parser.parse_args()
 
+    set_language(args.lang)
     apply_theme(pick_theme(args.theme))
     show_startup_screen()
 
     if not require_app_password():
-        print(f"{COLOR_ERROR}Authentication failed.{COLOR_RESET}")
+        print(f"{COLOR_ERROR}{tr('authentication_failed')}{COLOR_RESET}")
         return
 
     user_id, name = load_or_create_profile(args.port)
-    print(f"{COLOR_INFO}Your identifier: {user_id}{COLOR_RESET}")
+    print(f"{COLOR_INFO}{tr('your_identifier', id=user_id)}{COLOR_RESET}")
 
     mode = args.mode
     if not mode:
         mode = (
             input(
-                f"{COLOR_INPUT}Select mode: 'direct' for IP chat or 'contacts': {COLOR_RESET}"
+                f"{COLOR_INPUT}{tr('select_mode')}{COLOR_RESET}"
             )
             .strip()
             .lower()
@@ -744,7 +919,7 @@ def main():
             start_chat("0.0.0.0", args.port, name, listen=True)
         else:
             target = args.host or input(
-                f"{COLOR_INPUT}Enter target IP or identifier: {COLOR_RESET}"
+                f"{COLOR_INPUT}{tr('enter_target')}{COLOR_RESET}"
             ).strip()
             data = decode_identifier(target)
             if data:
@@ -756,7 +931,7 @@ def main():
     elif mode == "contacts":
         contacts_mode(args.port, name)
     else:
-        print(f"{COLOR_ERROR}Unknown mode.{COLOR_RESET}")
+        print(f"{COLOR_ERROR}{tr('unknown_mode')}{COLOR_RESET}")
 
 if __name__ == "__main__":
     main()
