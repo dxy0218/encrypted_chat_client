@@ -1,6 +1,6 @@
 # Windows Installer Guide
 
-This project contains simple Python scripts for an encrypted chat client. To distribute the client on Windows with a graphical installer, build a standalone executable and wrap it in an installer package.
+This project contains simple Python scripts for an encrypted chat client. To distribute the client on Windows, a standalone executable and installer can be built automatically.
 
 ## 1. Prepare the environment
 1. [Install Python](https://www.python.org/downloads/windows/) (3.8+).
@@ -14,38 +14,18 @@ This project contains simple Python scripts for an encrypted chat client. To dis
    ```powershell
    pip install -r requirements.txt
    ```
+5. Ensure [PyInstaller](https://pyinstaller.org/) and [Inno Setup](https://jrsoftware.org/isinfo.php) are installed and available on `PATH`.
 
-## 2. Build a standalone executable
-1. Install PyInstaller:
-   ```powershell
-   pip install pyinstaller
-   ```
-2. Build the client executable:
-   ```powershell
-   pyinstaller --onefile encrypted_chat\encrypted_chat_client.py
-   ```
-   The executable will be generated at `dist\encrypted_chat_client.exe`.
+## 2. Build executable and installer
 
-## 3. Create an installer
-The executable can be packaged into a Windows installer using [Inno Setup](https://jrsoftware.org/isinfo.php).
+Run the automation script:
 
-1. Install Inno Setup and create a script (e.g. `installer.iss`) with the following content:
-   ```inno
-   [Setup]
-   AppName=Encrypted Chat Client
-   AppVersion=1.0
-   DefaultDirName={autopf}\EncryptedChatClient
-   OutputBaseFilename=EncryptedChatClientSetup
+```powershell
+python build_windows_installer.py
+```
 
-   [Files]
-   Source: "dist\encrypted_chat_client.exe"; DestDir: "{app}"; Flags: ignoreversion
+The script creates `dist\encrypted_chat_client.exe` and packages it with Inno Setup to produce `EncryptedChatClientSetup.exe`.
 
-   [Icons]
-   Name: "{autoprograms}\Encrypted Chat Client"; Filename: "{app}\encrypted_chat_client.exe"
-   ```
-2. Compile the script in Inno Setup to produce `EncryptedChatClientSetup.exe`.
-3. Running the installer lets users choose an installation directory and provides a shortcut to the executable.
+## 3. Run the client
 
-## 4. Run the client
 After installation, users can launch the "Encrypted Chat Client" from the Start Menu or by running the installed `.exe` directly.
-
