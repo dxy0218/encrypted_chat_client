@@ -36,13 +36,29 @@ try:
         def handle_client(client):
             while True:
                 try:
-                    encrypted_message = client.recv(1024)
+                    encrypted_message = client.recv(65536)
                     if not encrypted_message:
                         break
 
                     # 解密消息
                     message = cipher.decrypt(encrypted_message).decode()
-                    print(f"Received: {message}")
+                    if message.startswith("IMG|"):
+                        _, filename, _ = message.split("|", 2)
+                        print(f"Received image: {filename}")
+                    elif message.startswith("VIDSTART|"):
+                        _, filename, _ = message.split("|", 2)
+                        print(f"Receiving video: {filename}")
+                    elif message.startswith("VIDEND|"):
+                        _, filename = message.split("|", 1)
+                        print(f"Completed video: {filename}")
+                    elif message.startswith("FILESTART|"):
+                        _, filename, _ = message.split("|", 2)
+                        print(f"Receiving file: {filename}")
+                    elif message.startswith("FILEEND|"):
+                        _, filename = message.split("|", 1)
+                        print(f"Completed file: {filename}")
+                    else:
+                        print(f"Received: {message}")
 
                     # 广播加密消息
                     broadcast(encrypted_message, client)
