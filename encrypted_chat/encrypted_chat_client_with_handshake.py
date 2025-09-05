@@ -1,5 +1,6 @@
 import socket
 import os
+import base64
 from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives.asymmetric import dh
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF
