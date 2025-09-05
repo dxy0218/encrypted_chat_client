@@ -1,0 +1,4 @@
+encrypted_chat/key.key
+encrypted_chat/password.hash
+encrypted_chat/user_id.txt
+encrypted_chat/__pycache__/
