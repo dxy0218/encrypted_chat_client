@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+venv/
+
+# PyInstaller artifacts
+build/
+dist/
+*.spec
+
+# Inno Setup artifacts
+installer.iss
+EncryptedChatClientSetup.exe
+is.exe
