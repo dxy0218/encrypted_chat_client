@@ -1,0 +1,17 @@
+[project]
+name = "encrypted-chat-client"
+version = "0.0.1b0"
+description = "Cross-platform encrypted chat client with E2EE, LAN discovery, and relay fallback."
+requires-python = ">=3.10"
+dependencies = [
+  "cryptography",
+  "colorama",
+]
+
+[project.scripts]
+encrypted-chat = "encrypted_chat.encrypted_chat_client:main"
+encrypted-chat-gui = "encrypted_chat.encrypted_chat_client_gui:main"
+encrypted-chat-server = "encrypted_chat.encrypted_chat_server:main"
+
+[tool.setuptools]
+packages = ["encrypted_chat"]

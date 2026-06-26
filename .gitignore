@@ -1,10 +1,15 @@
+.venv/
+.venv-test/
 __pycache__/
+*.py[cod]
 *.pyc
+*.egg-info/
+.pytest_cache/
 venv/
 
 # PyInstaller artifacts
-build/
 dist/
+build/
 *.spec
 
 # Inno Setup artifacts

@@ -1,40 +1,226 @@
 # Encrypted Chat Client
 
-## 项目简介
-该项目展示了如何使用 Python 的 `socket` 与 `cryptography` 库构建一个简易的端到端加密聊天工具。服务器启动后会生成对称密钥并负责转发消息，客户端通过密钥对消息进行加解密，实现安全通信。
+A small Python chat demo with a relay server, end-to-end encrypted CLI chat,
+and a simple Tkinter GUI client.
 
-## 应用场景
-- 局域网或内网中的临时安全聊天
-- 学习对称加密与网络编程的示例
-- 快速演示加密通信流程
+By default, clients use a persistent Ed25519 identity key to sign an ephemeral
+X25519 session key exchange through the relay. Chat messages, read receipts,
+recalls, and file payloads are encrypted on the sending client and decrypted
+only by the receiving client. The server forwards opaque frames and cannot
+decrypt E2EE messages.
 
-## 项目优势
-- **安全性**：使用 `Fernet` 算法，对消息内容进行可靠加密
-- **易上手**：服务器与客户端脚本简单，适合学习与定制
-- **可扩展**：提供 Windows 打包脚本，支持一键构建安装程序
-- **实时性**：自动显示连接延迟并支持大文件传输进度
-- **消息回执与撤回**：提供已读提示并支持发送方撤回消息，命令行界面以颜色区分双方消息
+## Features
 
-## 系统兼容性
-- 支持 Windows 7、8、10、11
-- 兼容 Python 3.8 至 3.12，`setup_env.ps1` 可通过 `-PythonVersion` 参数指定所需版本
+- Default end-to-end encryption mode using X25519 plus HKDF-derived Fernet keys
+- Persistent Ed25519 identity keys that sign each ephemeral E2EE handshake
+- Mandatory peer identity verification with local fingerprint pinning
+- Shared safety code and safety phrase for easier out-of-band verification
+- Optional five-message unverified grace mode with warning labels
+- Compatibility mode for shared-key relay encryption
+- Optional multi-layer shared-key encryption by passing more than one `--key-file`
+- CLI chat with read receipts, message recall, latency pings, and file transfer
+- Tkinter GUI chat client
+- LAN relay discovery with internet relay fallback
+- Durable encrypted packet store for offline delivery workflows
+- Relay store-and-forward commands for opaque E2EE packets
+- Direct LAN peer listener/connector foundation
+- Payload padding helpers for message size reduction
+- Contact book foundation with multiple trusted devices per contact
+- Shared protocol helpers and basic protocol tests
 
-## 界面优化
-图形化客户端现在提供滚动聊天记录与 Enter 快捷发送消息，更便于使用
+## Requirements
 
-## 快速开始
-### 运行源代码
-1. 安装依赖：`pip install -r requirements.txt`
-2. 启动服务器：`python encrypted_chat/encrypted_chat_server.py`
-3. 在另一终端启动客户端：`python encrypted_chat/encrypted_chat_client.py`
-4. 输入消息即可通信；使用 `/file <路径>` 发送文件，终端会显示发送与接收进度
-5. 需要撤回消息时使用 `/recall <消息ID>`，消息 ID 会在发送时显示
-6. 客户端每隔数秒会显示与服务器之间的实时延迟，使用 `/exit` 退出
-7. 更多命令详见 [CLI_USAGE.md](CLI_USAGE.md)
+- Python 3.10+
+- `cryptography`
+- `colorama`
 
-### 构建 Windows 安装包
-项目提供 `build_windows_installer.py` 与 `setup_env.ps1` 用于自动构建 Windows 安装程序，详细步骤见 [WINDOWS_INSTALLER.md](WINDOWS_INSTALLER.md)。
-安装完成后，可在开始菜单找到两种启动方式：
-- **Encrypted Chat Client (CLI)**：命令提示符模式
-- **Encrypted Chat Client (GUI)**：窗口界面模式
+Current version: `v0.01beta`.
 
+Install dependencies:
+
+```powershell
+pip install -r requirements.txt
+```
+
+## Run E2EE Mode
+
+Start the relay server:
+
+```powershell
+python encrypted_chat/encrypted_chat_server.py --host 127.0.0.1 --port 65432
+```
+
+Start two CLI clients in separate terminals:
+
+```powershell
+python encrypted_chat/encrypted_chat_client.py --host 127.0.0.1 --port 65432
+```
+
+Each client prints its own fingerprint, the peer fingerprint, a safety code, and
+a safety phrase once the E2EE session is ready. The fingerprint comes from the
+persistent identity key, not from the temporary session key. Compare the safety
+phrase or fingerprint over a trusted channel, then run:
+
+```powershell
+/trust
+```
+
+Reject a suspicious peer with:
+
+```powershell
+/reject
+```
+
+Remove a previously trusted fingerprint with:
+
+```powershell
+/untrust
+```
+
+Use a specific local identity key file:
+
+```powershell
+python encrypted_chat/encrypted_chat_client.py --identity-key alice_identity.key --inbox-key alice_inbox.key
+```
+
+By default, unverified peers cannot chat. For testing, allow up to five warned
+messages with:
+
+```powershell
+python encrypted_chat/encrypted_chat_client.py --unverified-policy limit
+```
+
+Those messages are prefixed with an authenticity warning before encryption.
+
+Start the GUI client:
+
+```powershell
+python encrypted_chat/encrypted_chat_client_gui.py --host 127.0.0.1 --port 65432
+```
+
+## Platform Launchers
+
+Desktop launchers for Windows, Linux, and macOS plus the iOS/iPadOS 18.0+
+SwiftUI v0.01beta shell are documented in `PLATFORMS.md`.
+
+## LAN Discovery
+
+Advertise a relay on the local network:
+
+```powershell
+python encrypted_chat/encrypted_chat_server.py --lan-advertise --lan-advertise-host 192.168.1.20
+```
+
+Let a client discover a LAN relay before falling back to `--host` and `--port`:
+
+```powershell
+python encrypted_chat/encrypted_chat_client.py --lan-discover --host relay.example.com --port 65432
+```
+
+Use direct LAN peer mode without a relay:
+
+```powershell
+python encrypted_chat/encrypted_chat_client.py --direct-listen-host 0.0.0.0 --direct-listen-port 65432
+python encrypted_chat/encrypted_chat_client.py --direct-connect 192.168.1.20:65432
+```
+
+## Metadata Padding
+
+Both peers can opt into payload padding before E2EE encryption:
+
+```powershell
+python encrypted_chat/encrypted_chat_client.py --pad-payloads
+```
+
+Both sides must use the same padding setting for a session.
+
+## Offline Store-And-Forward
+
+Run the relay with an encrypted packet store:
+
+```powershell
+python encrypted_chat/encrypted_chat_server.py --offline-store relay_packets.jsonl
+```
+
+In the CLI, after an E2EE session is established, store an opaque encrypted
+packet for the current peer's persistent inbox key:
+
+```powershell
+/store hello while you were offline
+```
+
+Fetch packets addressed to your own identity fingerprint:
+
+```powershell
+/fetch
+```
+
+The relay stores only opaque E2EE frames keyed by recipient fingerprint.
+Recipients can decrypt stored packets after restart as long as their persistent
+inbox key is preserved.
+
+## Shared-Key Compatibility Mode
+
+The previous shared-key relay design is still available:
+
+```powershell
+python encrypted_chat/encrypted_chat_server.py --mode shared --key-file key.key
+python encrypted_chat/encrypted_chat_client.py --mode shared --key-file key.key
+python encrypted_chat/encrypted_chat_client_gui.py --mode shared --key-file key.key
+```
+
+Use multiple Fernet key files for nested shared-key encryption:
+
+```powershell
+python encrypted_chat/encrypted_chat_server.py --mode shared --key-file outer.key --key-file inner.key
+python encrypted_chat/encrypted_chat_client.py --mode shared --key-file outer.key --key-file inner.key
+python encrypted_chat/encrypted_chat_client_gui.py --mode shared --key-file outer.key --key-file inner.key
+```
+
+Both sides must pass the same key files in the same order. Encryption is applied
+from left to right, and decryption is applied in reverse order.
+
+## CLI Commands
+
+- `/trust` pins the current peer fingerprint under `--peer-alias`
+- `/untrust` removes the pinned fingerprint for `--peer-alias`
+- `/reject` rejects the current peer identity and disables chat
+- `/file <path>` sends a file to connected peers
+- `/recall <message-id>` recalls one of your sent messages
+- `/exit` exits the client
+
+## Development Roadmap
+
+1. Stabilize identity: persistent local client identity keys, safety phrase
+   comparison, and safer trust reset flows are implemented; QR export remains
+   next.
+2. Split the app into layers: crypto/session, message queue, transport, and UI
+   foundations are implemented.
+3. Add LAN-first transport: UDP LAN relay discovery and fallback are
+   implemented; direct peer listener/connector foundations are implemented.
+4. Add offline delivery: durable encrypted packet storage with TTL and
+   deduplication is implemented; relay store-and-forward commands and CLI hooks
+   are implemented.
+5. Add metadata reduction: optional E2EE payload padding is implemented;
+   batching, randomized retry timing, and relay rotation remain next.
+6. Add stronger multi-device/contact management before attempting group chat:
+   contact book foundations with multiple trusted devices are implemented.
+
+## Tests
+
+```powershell
+python -m unittest discover -s tests
+```
+
+## Security Notes
+
+- E2EE mode protects message contents from the relay server.
+- E2EE mode is designed for a two-client session; full group key management is
+  not implemented.
+- Peer identity is pinned locally after `/trust`; compare persistent identity
+  fingerprints or safety phrases before trusting to reduce man-in-the-middle
+  risk.
+- The E2EE session key is ephemeral and is not persisted.
+- Shared-key mode is not end-to-end encryption because the relay server owns the
+  shared key files and can decrypt messages.
+- This is still a learning demo, not a production secure messenger.

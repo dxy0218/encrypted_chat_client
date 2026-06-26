@@ -24,8 +24,8 @@ def check_environment() -> None:
     win_version = platform.release()
     print(f"Detected Windows version: {win_version}")
 
-    if sys.version_info < (3, 8):
-        raise RuntimeError("Python 3.8 or newer is required to build the installer")
+    if sys.version_info < (3, 10):
+        raise RuntimeError("Python 3.10 or newer is required to build the installer")
     print(f"Using Python {platform.python_version()}")
 
 

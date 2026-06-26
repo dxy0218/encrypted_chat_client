@@ -1,15 +1,69 @@
-# 命令提示符使用手册
+# CLI Usage
 
-该手册介绍如何在命令提示符（CLI）下运行加密聊天客户端以及常用命令。
+## E2EE Start
 
-## 启动
-1. 启动服务器：`python encrypted_chat/encrypted_chat_server.py`
-2. 在另一终端运行客户端：`python encrypted_chat/encrypted_chat_client.py`
+Start the relay server:
 
-## 常用命令
-- 直接输入文本并回车即可向对方发送消息。
-- `/file <路径>`：发送指定文件，双方都会看到进度条。
-- `/recall <消息ID>`：撤回之前发送的消息，消息 ID 会在发送时显示。
-- `/exit`：退出客户端。
+```powershell
+python encrypted_chat/encrypted_chat_server.py --host 127.0.0.1 --port 65432
+```
 
-客户端界面使用颜色区分双方消息，并在对方读取消息后显示提示。
+Start a CLI client in another terminal:
+
+```powershell
+python encrypted_chat/encrypted_chat_client.py --host 127.0.0.1 --port 65432
+```
+
+Start another client in a third terminal to complete the E2EE handshake. Each
+client prints persistent identity fingerprints plus a shared safety code and
+safety phrase after the session is established. Compare the phrase or peer
+fingerprint over a trusted channel, then run `/trust`.
+
+Use a specific local identity key file:
+
+```powershell
+python encrypted_chat/encrypted_chat_client.py --identity-key alice_identity.key --inbox-key alice_inbox.key
+```
+
+Use direct LAN peer mode without a relay:
+
+```powershell
+python encrypted_chat/encrypted_chat_client.py --direct-listen-host 0.0.0.0 --direct-listen-port 65432
+python encrypted_chat/encrypted_chat_client.py --direct-connect 192.168.1.20:65432
+```
+
+By default, unverified peers cannot chat. For a short test-only grace period,
+allow five warned messages:
+
+```powershell
+python encrypted_chat/encrypted_chat_client.py --unverified-policy limit
+```
+
+## Shared-Key Compatibility Mode
+
+```powershell
+python encrypted_chat/encrypted_chat_server.py --mode shared --key-file key.key
+python encrypted_chat/encrypted_chat_client.py --mode shared --key-file key.key
+```
+
+For multi-layer shared-key encryption, repeat `--key-file` on the server and
+every client:
+
+```powershell
+python encrypted_chat/encrypted_chat_server.py --mode shared --key-file outer.key --key-file inner.key
+python encrypted_chat/encrypted_chat_client.py --mode shared --key-file outer.key --key-file inner.key
+```
+
+The key file order must match on both sides.
+
+## Commands
+
+- Type text and press Enter to send a message.
+- `/trust` pins the current peer fingerprint under `--peer-alias`.
+- `/untrust` removes the pinned fingerprint for `--peer-alias`.
+- `/reject` rejects the current peer identity and disables chat.
+- `/store <message>` stores an E2EE offline packet for the current peer.
+- `/fetch` fetches E2EE offline packets addressed to your identity fingerprint.
+- `/file <path>` sends a file and shows transfer progress.
+- `/recall <message-id>` recalls one of your sent messages.
+- `/exit` closes the client.
