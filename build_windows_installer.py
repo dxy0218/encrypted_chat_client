@@ -100,17 +100,31 @@ def build_executable() -> None:
     """Build both console and GUI executables using PyInstaller."""
     run(
         [
-            "pyinstaller",
+            sys.executable,
+            "-m",
+            "PyInstaller",
+            "--noconfirm",
             "--onefile",
-            str(ROOT / "encrypted_chat" / "encrypted_chat_client.py"),
+            "--paths",
+            str(ROOT),
+            "--name",
+            "EncryptedChatCLI",
+            str(ROOT / "scripts" / "desktop_cli.py"),
         ]
     )
     run(
         [
-            "pyinstaller",
+            sys.executable,
+            "-m",
+            "PyInstaller",
+            "--noconfirm",
             "--onefile",
             "--windowed",
-            str(ROOT / "encrypted_chat" / "encrypted_chat_client_gui.py"),
+            "--paths",
+            str(ROOT),
+            "--name",
+            "EncryptedChatClient",
+            str(ROOT / "scripts" / "desktop_gui.py"),
         ]
     )
 
@@ -121,17 +135,17 @@ def create_inno_script() -> Path:
     iss_content = f"""
 [Setup]
 AppName=Encrypted Chat Client
-AppVersion=1.0
+AppVersion=0.01beta
 DefaultDirName={{autopf}}\\EncryptedChatClient
 OutputBaseFilename=EncryptedChatClientSetup
 
 [Files]
-Source: "{DIST_DIR}\\encrypted_chat_client.exe"; DestDir: "{{app}}"; Flags: ignoreversion
-Source: "{DIST_DIR}\\encrypted_chat_client_gui.exe"; DestDir: "{{app}}"; Flags: ignoreversion
+Source: "{DIST_DIR}\\EncryptedChatCLI.exe"; DestDir: "{{app}}"; Flags: ignoreversion
+Source: "{DIST_DIR}\\EncryptedChatClient.exe"; DestDir: "{{app}}"; Flags: ignoreversion
 
 [Icons]
-Name: "{{autoprograms}}\\Encrypted Chat Client (CLI)"; Filename: "{{app}}\\encrypted_chat_client.exe"
-Name: "{{autoprograms}}\\Encrypted Chat Client (GUI)"; Filename: "{{app}}\\encrypted_chat_client_gui.exe"
+Name: "{{autoprograms}}\\Encrypted Chat Client (CLI)"; Filename: "{{app}}\\EncryptedChatCLI.exe"
+Name: "{{autoprograms}}\\Encrypted Chat Client (GUI)"; Filename: "{{app}}\\EncryptedChatClient.exe"
 """.strip()
     iss_path.write_text(iss_content)
     return iss_path

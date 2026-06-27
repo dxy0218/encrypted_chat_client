@@ -10,6 +10,7 @@ venv/
 # PyInstaller artifacts
 dist/
 build/
+release/
 *.spec
 
 # Inno Setup artifacts

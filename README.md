@@ -100,7 +100,7 @@ python encrypted_chat/encrypted_chat_client_gui.py --host 127.0.0.1 --port 65432
 
 ## Platform Launchers
 
-Desktop launchers for Windows, Linux, and macOS plus the iOS/iPadOS 18.0+
+Packaged Windows, Linux, and macOS client executables plus the iOS/iPadOS 18.0+
 SwiftUI v0.01beta shell are documented in `PLATFORMS.md`.
 
 ## LAN Discovery

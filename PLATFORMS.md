@@ -1,30 +1,37 @@
 # Platform Builds v0.01beta
 
-The Python desktop client remains the protocol source of truth for v0.01beta.
-Platform launchers and the Apple SwiftUI shell are split under `platforms/`.
+The Python desktop protocol remains the source of truth for v0.01beta. Desktop
+users should run packaged client executables, not source launch scripts.
 
 ## Windows
 
 ```powershell
-.\platforms\desktop\windows\start_server.ps1
-.\platforms\desktop\windows\start_gui.ps1
+python .\scripts\build_desktop_clients.py --platform-tag windows-x64
+.\release\windows-x64\EncryptedChatClient.exe
+.\release\windows-x64\EncryptedChatCLI.exe --help
 ```
 
 ## Linux
 
 ```bash
-chmod +x platforms/desktop/linux/*.sh
-./platforms/desktop/linux/start_server.sh
-./platforms/desktop/linux/start_gui.sh
+python3 scripts/build_desktop_clients.py --platform-tag linux-x64
+./release/linux-x64/EncryptedChatClient
+./release/linux-x64/EncryptedChatCLI --help
 ```
 
 ## macOS
 
 ```bash
-chmod +x platforms/desktop/macos/*.command
-./platforms/desktop/macos/start_server.command
-./platforms/desktop/macos/start_gui.command
+python3 scripts/build_desktop_clients.py --platform-tag macos-arm64
+./release/macos-arm64/EncryptedChatClient
+./release/macos-arm64/EncryptedChatCLI --help
 ```
+
+The GitHub Actions workflow `.github/workflows/build-desktop-clients.yml`
+builds native Windows, Linux, and macOS client artifacts on the matching host
+platforms. Python desktop applications should not be cross-compiled from
+Windows for Linux/macOS because bundled GUI and crypto runtime dependencies are
+platform-native.
 
 ## iOS and iPadOS 18.0+
 
